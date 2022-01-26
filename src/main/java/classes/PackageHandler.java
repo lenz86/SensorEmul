@@ -16,21 +16,23 @@ public class PackageHandler {
 
     public static int[] sendRequest(int[] data) {
         int[] result = {};
-        //проверяем разделители пакета
-        if (data[0] == 0x7E && data[data.length - 1] == 0x7E) {
-            switch (data[2]) {
-                case 0x03:
-                    result = pingSensor(data[3]);
-                    break;
-                case 0x0E:
-                    result = pullVersion(data[3]);
-                    break;
-                case 0x01:
-                    result = getValues(data[3]);
-                    break;
-                case 0x0B:
-                    result = getFactoryId(data[3]);
-                    break;
+        if (data.length > 1) {
+            //проверяем разделители пакета
+            if (data[0] == 0x7E && data[data.length - 1] == 0x7E) {
+                switch (data[2]) {
+                    case 0x03:
+                        result = pingSensor(data[3]);
+                        break;
+                    case 0x0E:
+                        result = pullVersion(data[3]);
+                        break;
+                    case 0x01:
+                        result = getValues(data[3]);
+                        break;
+                    case 0x0B:
+                        result = getFactoryId(data[3]);
+                        break;
+                }
             }
         }
         return result;
