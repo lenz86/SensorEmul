@@ -5,9 +5,12 @@ import jssc.SerialPortException;
 
 import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Generator extends Thread {
     private static Set<Incl> sensors;
+    private static Logger log = Logger.getLogger(PortListener.class.getName());
 
     public Generator(Set<Incl> sensors) {
         this.sensors = sensors;
@@ -19,6 +22,12 @@ public class Generator extends Thread {
 
     @Override
     public void run() {
+        Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
+            @Override
+            public void uncaughtException(Thread t, Throwable e) {
+                log.log(Level.WARNING, "UNCHECKED EXCEPTION!: ", e);
+            }
+        });
         PortListener portListener = new PortListener("COM4");
         portListener.start();  //открытие COM-порта и запуск прослушивания получения данных
         while (!Thread.currentThread().isInterrupted()) {
@@ -34,6 +43,7 @@ public class Generator extends Thread {
                 e.printStackTrace();
                 portListener.interrupt();
                 Thread.currentThread().interrupt();
+                log.log(Level.WARNING, "Exception: ", e);
             }
         }
     }

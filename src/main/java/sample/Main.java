@@ -14,11 +14,13 @@ import javafx.stage.StageStyle;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.BlockingQueue;
+import java.util.logging.LogManager;
 
 public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+        LogManager.getLogManager().readConfiguration(Main.class.getResourceAsStream("/logging.properties"));
         Parent root = FXMLLoader.load(getClass().getResource("/sample.fxml"));
         primaryStage.setTitle("Inclinometrs");
         primaryStage.setScene(new Scene(root, 990, 768));
