@@ -1,5 +1,6 @@
 package sample;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.HashSet;
 import java.util.Observable;
@@ -15,6 +16,15 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import org.w3c.dom.Document;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
 public class Controller {
 
@@ -61,6 +71,9 @@ public class Controller {
     private Button clrSensorBtn;
 
     @FXML
+    private Button readConfFromFileBtn;
+
+    @FXML
     private Label parErrorText;
 
     private Set<Incl> sensors = null;
@@ -74,7 +87,11 @@ public class Controller {
         String inclID = factoryT.getText();
         String inclVersion = protocolT.getText();
         String inclAddress = Converter.convertHex(addressT.getText());
-        if (inclName.equals("")||inclID.equals("")||inclVersion.equals("")||inclAddress.equals("")) {
+        addSensors(inclName, inclID, inclVersion, inclAddress);
+    }
+
+    void addSensors (String inclName, String inclID, String inclVersion, String inclAddress) {
+        if (inclName.equals("") || inclID.equals("") || inclVersion.equals("") || inclAddress.equals("")) {
             parErrorText.setVisible(true);
         } else {
             Incl incl = new Incl(inclName, inclID, inclVersion, inclAddress);
@@ -88,7 +105,6 @@ public class Controller {
             log.appendText("Added inclinometr: " + incl.toString() + "\n");
             clearFields();
         }
-
     }
 
     @FXML
@@ -96,6 +112,56 @@ public class Controller {
         list.clear();
         sensors.clear();
         list1.setItems(list);
+    }
+
+    @FXML
+    void readFromConf(MouseEvent event) {
+        try {
+            // Создается построитель документа
+            DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+            // Создается дерево DOM документа из файла
+            Document document = documentBuilder.parse(Main.class.getResourceAsStream("/sensorpreload.xml"));
+            // Проверяем документ на отсутствие двойных пробелов, неправильных тегов и т.д
+            document.getDocumentElement().normalize();
+            // Получаем корневой элемент
+//            Node root = document.getDocumentElement();
+            // Просматриваем все подэлементы корневого - т.е. книги
+            NodeList sensorsList = document.getElementsByTagName("Sensor");
+            for (int j = 0; j < sensorsList.getLength(); j++) {
+                Node first = sensorsList.item(j);
+                NodeList sensorParam = first.getChildNodes();
+                Node current;
+                String inclName = "";
+                String inclID = "";
+                String inclVersion = "";
+                String inclAddress = "";
+                for (int i = 0; i < sensorParam.getLength(); i++) {
+                    current = sensorParam.item(i);
+                    if (current.getNodeType() == Node.ELEMENT_NODE) {
+                        switch (current.getNodeName()) {
+                            case "Name":
+                                inclName = current.getTextContent();
+                                break;
+                            case "FactoryID":
+                                inclID = current.getTextContent();
+                                break;
+                            case "ProtocolVersion":
+                                inclVersion = current.getTextContent();
+                                break;
+                            case "Address":
+                                inclAddress = current.getTextContent();
+                                break;
+                            default:
+                                System.out.println("No such element");
+                                break;
+                        }
+                    }
+                }
+                addSensors(inclName, inclID, inclVersion, inclAddress);
+            }
+        } catch (ParserConfigurationException | SAXException | IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -149,7 +215,6 @@ public class Controller {
         protocolT.setText("");
         addressT.setText("");
     }
-
 
 
 //    class LogField extends Thread {

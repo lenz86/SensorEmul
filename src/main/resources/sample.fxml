@@ -63,6 +63,16 @@
             <Font name="Microsoft New Tai Lue" size="12.0" />
          </font>
       </Button>
+      <Button fx:id="clrSensorBtn" layoutX="856.0" layoutY="106.0" mnemonicParsing="false" onMouseClicked="#clearSensorClick" prefHeight="24.0" prefWidth="119.0" text="Clear">
+         <font>
+            <Font name="Microsoft New Tai Lue" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="readConfFromFileBtn" layoutX="856.0" layoutY="142.0" mnemonicParsing="false" onMouseClicked="#readFromConf" prefHeight="24.0" prefWidth="119.0" text="Read from configuration">
+         <font>
+            <Font name="Microsoft New Tai Lue" size="12.0" />
+         </font>
+      </Button>
       <Label fx:id="parErrorText" layoutX="774.0" layoutY="108.0" prefHeight="20.0" prefWidth="205.0" text="Enter parameters in all fields!" textAlignment="RIGHT" textFill="#f50000" visible="false">
          <font>
             <Font name="System Bold" size="14.0" />
@@ -71,11 +81,6 @@
       <Button fx:id="startBtn" layoutX="484.0" layoutY="203.0" mnemonicParsing="false" onMouseClicked="#startBtnClick" prefHeight="76.0" prefWidth="198.0" text="START">
          <font>
             <Font name="Microsoft New Tai Lue" size="36.0" />
-         </font>
-      </Button>
-      <Button fx:id="clrSensorBtn" layoutX="856.0" layoutY="106.0" mnemonicParsing="false" onMouseClicked="#clearSensorClick" prefHeight="24.0" prefWidth="119.0" text="Clear">
-         <font>
-            <Font name="Microsoft New Tai Lue" size="12.0" />
          </font>
       </Button>
       <Button fx:id="stopBtn" disable="true" layoutX="484.0" layoutY="293.0" mnemonicParsing="false" onMouseClicked="#stopBtnClick" prefHeight="76.0" prefWidth="198.0" text="STOP">

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SensorList>
+    <Sensor id="1">
+        <Name>I1.1</Name>
+        <FactoryID>4900</FactoryID>
+        <ProtocolVersion>v2.11</ProtocolVersion>
+        <Address>3</Address>
+    </Sensor>
+    <Sensor id="2">
+        <Name>I1.2</Name>
+        <FactoryID>4901</FactoryID>
+        <ProtocolVersion>v2.11</ProtocolVersion>
+        <Address>5</Address>
+    </Sensor>
+    <Sensor id="3">
+        <Name>I1.3</Name>
+        <FactoryID>4902</FactoryID>
+        <ProtocolVersion>v2.11</ProtocolVersion>
+        <Address>6</Address>
+    </Sensor>
+    <Sensor id="4">
+        <Name>I1.4</Name>
+        <FactoryID>4903</FactoryID>
+        <ProtocolVersion>v2.11</ProtocolVersion>
+        <Address>7</Address>
+    </Sensor>
+    <Sensor id="5">
+        <Name>I1.5</Name>
+        <FactoryID>4904</FactoryID>
+        <ProtocolVersion>v2.11</ProtocolVersion>
+        <Address>9</Address>
+    </Sensor>
+    <Sensor id="6">
+        <Name>I1.6</Name>
+        <FactoryID>4905</FactoryID>
+        <ProtocolVersion>v2.11</ProtocolVersion>
+        <Address>13</Address>
+    </Sensor>
+    <Sensor id="7">
+        <Name>I1.7</Name>
+        <FactoryID>4906</FactoryID>
+        <ProtocolVersion>v2.11</ProtocolVersion>
+        <Address>14</Address>
+    </Sensor>
+    <Sensor id="8">
+        <Name>I1.8</Name>
+        <FactoryID>4907</FactoryID>
+        <ProtocolVersion>v2.11</ProtocolVersion>
+        <Address>17</Address>
+    </Sensor>
+    <Sensor id="9">
+        <Name>I1.9</Name>
+        <FactoryID>4908</FactoryID>
+        <ProtocolVersion>v2.11</ProtocolVersion>
+        <Address>25</Address>
+    </Sensor>
+    <Sensor id="10">
+        <Name>I1.10</Name>
+        <FactoryID>4909</FactoryID>
+        <ProtocolVersion>v2.11</ProtocolVersion>
+        <Address>31</Address>
+    </Sensor>
+</SensorList>
