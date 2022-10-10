@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 
 public class Generator extends Thread {
     private static Set<Incl> sensors;
-    private static Logger log = Logger.getLogger(PortListener.class.getName());
+    private static Logger log = Logger.getLogger(Generator.class.getName());
 
     public Generator(Set<Incl> sensors) {
         this.sensors = sensors;
